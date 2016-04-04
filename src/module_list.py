@@ -578,8 +578,8 @@ ext_modules = [
               libraries = ["flint", "gmp", "gmpxx", "m", "stdc++"],
               extra_compile_args = ["-std=c99", "-D_XPG6"]),
 
-    Extension('sage.libs.fplll.fplll',
-              sources = ['sage/libs/fplll/fplll.pyx']),
+#    Extension('sage.libs.fplll.fplll',
+#              sources = ['sage/libs/fplll/fplll.pyx']),
 
     Extension('sage.libs.gmp.pylong',
               sources = ['sage/libs/gmp/pylong.pyx']),
