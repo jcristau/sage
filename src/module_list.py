@@ -1371,8 +1371,8 @@ ext_modules = [
               libraries = ['ntl'],
               language = 'c++'),
 
-    Extension('sage.rings.finite_rings.element_pari_ffelt',
-              sources = ['sage/rings/finite_rings/element_pari_ffelt.pyx']),
+#    Extension('sage.rings.finite_rings.element_pari_ffelt',
+#              sources = ['sage/rings/finite_rings/element_pari_ffelt.pyx']),
 
     Extension('sage.rings.finite_rings.hom_finite_field',
               sources = ["sage/rings/finite_rings/hom_finite_field.pyx"]),
