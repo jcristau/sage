@@ -916,22 +916,22 @@ ext_modules = [
               depends = [SAGE_INC + "/m4rie/m4rie.h"],
               extra_compile_args = ['-std=c99'] + m4ri_extra_compile_args),
 
-    Extension('sage.matrix.matrix_modn_dense_float',
-              sources = ['sage/matrix/matrix_modn_dense_float.pyx'],
-              language="c++",
-              libraries = ['ntl', 'linbox', 'givaro', 'mpfr', 'gmpxx', 'gmp'] + cblas_libs,
-              library_dirs = cblas_library_dirs,
-              include_dirs = cblas_include_dirs,
-              extra_compile_args = ['-DDISABLE_COMMENTATOR'] + givaro_extra_compile_args),
-
-    Extension('sage.matrix.matrix_modn_dense_double',
-              sources = ['sage/matrix/matrix_modn_dense_double.pyx'],
-              language="c++",
-              libraries = ['ntl', 'linbox', 'givaro', 'mpfr', 'gmpxx', 'gmp'] + cblas_libs,
-              library_dirs = cblas_library_dirs,
-              include_dirs = cblas_include_dirs,
-              extra_compile_args = ['-std=c99', "-D_XPG6", "-DDISABLE_COMMENTATOR"]
-                    + m4ri_extra_compile_args + givaro_extra_compile_args),
+#    Extension('sage.matrix.matrix_modn_dense_float',
+#              sources = ['sage/matrix/matrix_modn_dense_float.pyx'],
+#              language="c++",
+#              libraries = ['ntl', 'linbox', 'givaro', 'mpfr', 'gmpxx', 'gmp'] + cblas_libs,
+#              library_dirs = cblas_library_dirs,
+#              include_dirs = cblas_include_dirs,
+#              extra_compile_args = ['-DDISABLE_COMMENTATOR'] + givaro_extra_compile_args),
+#
+#    Extension('sage.matrix.matrix_modn_dense_double',
+#              sources = ['sage/matrix/matrix_modn_dense_double.pyx'],
+#              language="c++",
+#              libraries = ['ntl', 'linbox', 'givaro', 'mpfr', 'gmpxx', 'gmp'] + cblas_libs,
+#              library_dirs = cblas_library_dirs,
+#              include_dirs = cblas_include_dirs,
+#              extra_compile_args = ['-std=c99', "-D_XPG6", "-DDISABLE_COMMENTATOR"]
+#                    + m4ri_extra_compile_args + givaro_extra_compile_args),
 
     Extension('sage.matrix.matrix_modn_sparse',
               sources = ['sage/matrix/matrix_modn_sparse.pyx']),
