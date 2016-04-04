@@ -62,7 +62,7 @@ Now using the ``multiprocessing`` module::
 
 cimport libc.errno
 from posix.signal cimport *
-from posix.select cimport *
+from select cimport *
 
 
 cpdef int get_fileno(f) except -1:
