@@ -613,20 +613,20 @@ ext_modules = [
     Extension('sage.libs.lrcalc.lrcalc',
               sources = ["sage/libs/lrcalc/lrcalc.pyx"]),
 
-    Extension('sage.libs.pari.closure',
-              sources = ["sage/libs/pari/closure.pyx"],
-              libraries = ['pari', 'gmp']),
-
-    Extension('sage.libs.pari.gen',
-              sources = ["sage/libs/pari/gen.pyx"]),
-
-    Extension('sage.libs.pari.handle_error',
-              sources = ["sage/libs/pari/handle_error.pyx"]),
-
-    Extension('sage.libs.pari.pari_instance',
-              sources = ["sage/libs/pari/pari_instance.pyx"],
-              extra_compile_args = ["-std=c99", "-D_XPG6"],
-              libraries = ['flint']),
+#    Extension('sage.libs.pari.closure',
+#              sources = ["sage/libs/pari/closure.pyx"],
+#              libraries = ['pari', 'gmp']),
+#
+#    Extension('sage.libs.pari.gen',
+#              sources = ["sage/libs/pari/gen.pyx"]),
+#
+#    Extension('sage.libs.pari.handle_error',
+#              sources = ["sage/libs/pari/handle_error.pyx"]),
+#
+#    Extension('sage.libs.pari.pari_instance',
+#              sources = ["sage/libs/pari/pari_instance.pyx"],
+#              extra_compile_args = ["-std=c99", "-D_XPG6"],
+#              libraries = ['flint']),
 
     Extension('sage.libs.ppl',
               sources = ['sage/libs/ppl.pyx', 'sage/libs/ppl_shim.cc']),
