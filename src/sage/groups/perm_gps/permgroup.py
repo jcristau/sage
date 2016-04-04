@@ -143,7 +143,6 @@ from sage.groups.perm_gps.permgroup_element import PermutationGroupElement, stan
 from sage.groups.abelian_gps.abelian_group import AbelianGroup
 from sage.misc.cachefunc import cached_method
 from sage.groups.class_function import ClassFunction
-from sage.misc.package import is_package_installed
 from sage.sets.finite_enumerated_set import FiniteEnumeratedSet
 from sage.categories.all import FiniteEnumeratedSets
 from sage.groups.conjugacy_classes import ConjugacyClassGAP
@@ -162,7 +161,10 @@ def load_hap():
     try:
         gap.load_package("hap")
     except Exception:
-        gap.load_package("hap")
+        try:
+            gap.load_package("hap")
+        except Exception:
+            raise RuntimeError("You must install gap_sage_packages package.")
 
 def hap_decorator(f):
     """
@@ -188,8 +190,6 @@ def hap_decorator(f):
     """
     @wraps(f)
     def wrapped(self, n, p=0):
-        if not is_package_installed('gap_packages'):
-            raise RuntimeError("You must install the optional gap_packages package.")
         load_hap()
         from sage.arith.all import is_prime
         if not (p == 0 or is_prime(p)):
@@ -1664,9 +1664,7 @@ class PermutationGroup_generic(group.FiniteGroup):
         try:
             return [Integer(n) for n in self._gap_().IdGroup()]
         except RuntimeError:
-            if not is_package_installed('database_gap'):
-                raise RuntimeError("You must install the optional database_gap package first.")
-            raise
+            raise RuntimeError("You must install gap_sage_packages first.")
 
     def id(self):
         """
@@ -1717,9 +1715,7 @@ class PermutationGroup_generic(group.FiniteGroup):
         try:
             return Integer(self._gap_().PrimitiveIdentification())
         except RuntimeError:
-            if not is_package_installed('database_gap'):
-                raise RuntimeError("You must install the optional database_gap package first.")
-            raise
+            raise RuntimeError("You must install gap_sage_packages first.")
 
     def center(self):
         """
@@ -4095,8 +4091,6 @@ class PermutationGroup_generic(group.FiniteGroup):
         - David Joyner and Graham Ellis
 
         """
-        if not is_package_installed('gap_packages'):
-            raise RuntimeError("You must install the optional gap_packages package.")
         load_hap()
         from sage.arith.all import is_prime
         if not (p == 0 or is_prime(p)):

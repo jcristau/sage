@@ -13,23 +13,18 @@ test.spyx
 --advanced
 -c
 --cython
---dev
 --ecl
---experimental
---fixdoctests
 --gap
 --gdb
 --gp
 -h
 --help
---info
 --ipython
 --kash
 --lisp
 --maxima
 --min
 --mwrank
---optional
 --preparse
 --python
 -q
@@ -40,7 +35,6 @@ test.spyx
 --sh
 --singular
 --sqlite3
---standard
 --startuptime
 -t
 -v
@@ -193,36 +187,6 @@ def test_executable(args, input="", timeout=100.0, **kwds):
         sage: (out, err, ret) = test_executable(["sage", "--root"])
         sage: len(out) >= 2   # at least one character + newline
         True
-        sage: err
-        ''
-        sage: ret
-        0
-
-    Test ``sage --info [packages]`` and the equivalent
-    ``sage -p --info --info [packages]`` (the doubling of ``--info``
-    is intentional, that option should be idempotent)::
-
-        sage: out, err, ret = test_executable(["sage", "--info", "sqlite"])
-        sage: print out
-        Found local metadata for sqlite-...
-        = SQLite =
-        ...
-        SQLite is a software library that implements a self-contained,
-        serverless, zero-configuration, transactional SQL database engine.
-        ...
-        sage: err
-        ''
-        sage: ret
-        0
-
-        sage: out, err, ret = test_executable(["sage", "-p", "--info", "--info", "sqlite"])
-        sage: print out
-        Found local metadata for sqlite-...
-        = SQLite =
-        ...
-        SQLite is a software library that implements a self-contained,
-        serverless, zero-configuration, transactional SQL database engine.
-        ...
         sage: err
         ''
         sage: ret
@@ -404,50 +368,6 @@ def test_executable(args, input="", timeout=100.0, **kwds):
         ...
         RuntimeError: refusing to run doctests...
 
-    Now run a test for the fixdoctests script and, in particular, check that the
-    issues raised in :trac:`10589` are fixed. We have to go to slightly silly
-    lengths to doctest the output.::
-
-        sage: test='r\"\"\"Add a doc-test for the fixdoctest command line option and, in particular, check that\n:trac:`10589` is fixed.\n\nEXAMPLES::\n\n    sage: 1+1              # incorrect output\n    3\n    sage: m=matrix(ZZ,3)   # output when none is expected\n    [0 0 0]\n    [0 0 0]\n    [1 0 0]\n    sage: (2/3)*m          # no output when it is expected\n    sage: mu=PartitionTuple([[4,4],[3,3,2,1],[1,1]])   # output when none is expected\n    [4, 4, 3, 3, 2, 1, 1]\n    sage: mu.pp()          # uneven indentation\n    ****\n    ****\n    sage: PartitionTuples.global_options(convention="French")\n    sage: mu.pp()         # fix doctest with uneven indentation\n    sage: PartitionTuples.global_options.reset()\n\"\"\"\n'
-        sage: test_file = os.path.join(tmp_dir(), 'test_file.py')
-        sage: F = open(test_file, 'w')
-        sage: F.write(test)
-        sage: F.close()
-        sage: (out, err, ret) = test_executable(["sage", "--fixdoctests", test_file])
-        sage: with open(test_file, 'r') as f:
-        ....:     fixed_test = f.read()
-        sage: import difflib
-        sage: list(difflib.unified_diff(test.splitlines(), fixed_test.splitlines()))[2:-1]
-        ['@@ -4,18 +4,23 @@\n',
-         ' EXAMPLES::',
-         ' ',
-         '     sage: 1+1              # incorrect output',
-         '-    3',
-         '+    2',
-         '     sage: m=matrix(ZZ,3)   # output when none is expected',
-         '+    sage: (2/3)*m          # no output when it is expected',
-         '     [0 0 0]',
-         '     [0 0 0]',
-         '-    [1 0 0]',
-         '-    sage: (2/3)*m          # no output when it is expected',
-         '+    [0 0 0]',
-         '     sage: mu=PartitionTuple([[4,4],[3,3,2,1],[1,1]])   # output when none is expected',
-         '-    [4, 4, 3, 3, 2, 1, 1]',
-         '     sage: mu.pp()          # uneven indentation',
-         '-    ****',
-         '-    ****',
-         '+       ****   ***   *',
-         '+       ****   ***   *',
-         '+              **',
-         '+              *',
-         '     sage: PartitionTuples.global_options(convention="French")',
-         '     sage: mu.pp()         # fix doctest with uneven indentation',
-         '+    *',
-         '+    **',
-         '+    ****   ***   *',
-         '+    ****   ***   *',
-         '     sage: PartitionTuples.global_options.reset()']
-
     Test external programs being called by Sage::
 
         sage: (out, err, ret) = test_executable(["sage", "--sh"], "echo Hello World\nexit 42\n")
@@ -593,32 +513,6 @@ def test_executable(args, input="", timeout=100.0, **kwds):
         sage: err
         ''
         sage: ret
-        0
-
-    Check some things requiring an internet connection::
-
-        sage: (out, err, ret) = test_executable(["sage", "--standard"])  # optional - internet
-        sage: out.find("atlas") >= 0  # optional - internet
-        True
-        sage: err  # optional - internet
-        ''
-        sage: ret  # optional - internet
-        0
-
-        sage: (out, err, ret) = test_executable(["sage", "--optional"])  # optional - internet
-        sage: out.find("database_cremona_ellcurve") >= 0  # optional - internet
-        True
-        sage: err  # optional - internet
-        ''
-        sage: ret  # optional - internet
-        0
-
-        sage: (out, err, ret) = test_executable(["sage", "--experimental"])  # optional - internet
-        sage: out.find("macaulay2") >= 0  # optional - internet
-        True
-        sage: err  # optional - internet
-        ''
-        sage: ret  # optional - internet
         0
 
     Check an illegal command line option.  This outputs an error to stdout,

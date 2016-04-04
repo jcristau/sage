@@ -1397,16 +1397,10 @@ def structure_description(G, latex=False):
         'A8'
     """
     import re
-    from sage.misc.package import is_package_installed
     def correct_dihedral_degree(match):
         return "%sD%d" % (match.group(1), int(match.group(2))/2)
 
-    try:
-        description = str(G._gap_().StructureDescription())
-    except RuntimeError:
-        if not is_package_installed('database_gap'):
-            raise RuntimeError("You must install the optional database_gap package first.")
-        raise
+    description = str(G._gap_().StructureDescription())
 
     description = re.sub(r"(\A|\W)D(\d+)", correct_dihedral_degree, description)
     if not latex:

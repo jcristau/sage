@@ -65,9 +65,9 @@ def lovasz_theta(graph):
     from sage.misc.temporary_file import tmp_filename
     import os, subprocess
     from sage.env import SAGE_LOCAL
-    from sage.misc.package import is_package_installed, PackageNotFoundError
+    from sage.misc.package import PackageNotFoundError
 
-    if not is_package_installed('csdp'):
+    if not os.path.isfile(os.path.join(SAGE_LOCAL, 'bin', 'theta')):
         raise PackageNotFoundError("csdp")
 
     g = graph.relabel(inplace=False, perm=range(1,n+1)).networkx_graph()

@@ -51,13 +51,6 @@ from mrange import xmrange, mrange, xmrange_iter, mrange_iter, cartesian_product
 
 from fpickle import pickle_function, unpickle_function
 
-from dist import install_scripts
-
-from package import (install_package,
-        installed_packages, is_package_installed,
-        standard_packages, optional_packages, experimental_packages,
-        upgrade, package_versions)
-
 from pager import pager
 
 from sagedoc import (search_src, search_def, search_doc, browse_sage_doc,

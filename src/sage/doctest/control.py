@@ -93,7 +93,6 @@ class DocTestDefaults(SageObject):
         self.cachegrind = False
         self.omega = False
         self.failed = False
-        self.new = False
         self.show_skipped = False
         # We don't want to use the real stats file by default so that
         # we don't overwrite timings for the actual running doctests.
@@ -222,7 +221,7 @@ class DocTestController(SageObject):
                 options.timeout = int(os.getenv('SAGE_TIMEOUT', 5 * 60))
         if options.nthreads == 0:
             options.nthreads = int(os.getenv('SAGE_NUM_THREADS_PARALLEL',1))
-        if options.failed and not (args or options.new or options.sagenb):
+        if options.failed and not (args or options.sagenb):
             # If the user doesn't specify any files then we rerun all failed files.
             options.all = True
         if options.global_iterations == 0:
@@ -242,22 +241,8 @@ class DocTestController(SageObject):
             if s == 'true':
                 sage.misc.superseded.deprecation(18558, "Use --optional=all instead of --optional=true")
                 s = "all"
-            options.optional = set(s.split(','))
-            if "all" in options.optional:
-                # Special case to run all optional tests
-                options.optional = True
             else:
-                # We replace the 'optional' tag by all optional
-                # packages for which the installed version matches the
-                # latest available version (this implies in particular
-                # that the package is actually installed).
-                if 'optional' in options.optional:
-                    options.optional.discard('optional')
-                    from sage.misc.package import package_versions
-                    optional_pkgs = package_versions("optional", local=True)
-                    for pkg, versions in optional_pkgs.items():
-                        if versions[0] == versions[1]:
-                            options.optional.add(pkg)
+                options.optional = set(s.split(','))
 
                 # Check that all tags are valid
                 for o in options.optional:
@@ -508,7 +493,7 @@ class DocTestController(SageObject):
 
     def add_files(self):
         r"""
-        Checks for the flags '--all', '--new' and '--sagenb'.
+        Checks for the flags '--all' and '--sagenb'.
 
         For each one present, this function adds the appropriate directories and files to the todo list.
 
@@ -527,13 +512,6 @@ class DocTestController(SageObject):
 
         ::
 
-            sage: DD = DocTestDefaults(new = True)
-            sage: DC = DocTestController(DD, [])
-            sage: DC.add_files()
-            Doctesting ...
-
-        ::
-
             sage: DD = DocTestDefaults(sagenb = True)
             sage: DC = DocTestController(DD, [])
             sage: DC.add_files()
@@ -549,29 +527,9 @@ class DocTestController(SageObject):
             self.files.append(opj(SAGE_SRC, 'sage_setup'))
             self.files.append(SAGE_DOC_SRC)
             self.options.sagenb = True
-        DOT_GIT= opj(SAGE_ROOT, '.git')
-        have_git = os.path.exists(DOT_GIT)
-        if self.options.all or (self.options.new and not have_git):
+        if self.options.all:
             self.log("Doctesting entire Sage library.")
             all_files()
-        elif self.options.new and have_git:
-            # Get all files changed in the working repo.
-            self.log("Doctesting files changed since last git commit")
-            import subprocess
-            change = subprocess.check_output(["git",
-                                              "--git-dir=" + DOT_GIT,
-                                              "--work-tree=" + SAGE_ROOT,
-                                              "status",
-                                              "--porcelain"])
-            for line in change.split("\n"):
-                if not line:
-                    continue
-                data = line.strip().split(' ')
-                status, filename = data[0], data[-1]
-                if (set(status).issubset("MARCU")
-                    and filename.startswith("src/sage")
-                    and (filename.endswith(".py") or filename.endswith(".pyx"))):
-                    self.files.append(os.path.relpath(opj(SAGE_ROOT,filename)))
         if self.options.sagenb:
             if not self.options.all:
                 self.log("Doctesting the Sage notebook.")
@@ -597,8 +555,6 @@ class DocTestController(SageObject):
             sage: DC.expand_files_into_sources()
             sage: len(DC.sources)
             10
-            sage: DC.sources[0].options.optional
-            True
 
         ::
 
@@ -833,14 +789,9 @@ class DocTestController(SageObject):
             sage: DC = DocTestController(DocTestDefaults(), [])
             sage: DC._optional_tags_string()
             'sage'
-            sage: DC = DocTestController(DocTestDefaults(optional="all,and,some,more"), [])
-            sage: DC._optional_tags_string()
-            'all'
             sage: DC = DocTestController(DocTestDefaults(optional="true"), [])
             doctest:...: DeprecationWarning: Use --optional=all instead of --optional=true
             See http://trac.sagemath.org/18558 for details.
-            sage: DC._optional_tags_string()
-            'all'
             sage: DC = DocTestController(DocTestDefaults(optional="sage,openssl"), [])
             sage: DC._optional_tags_string()
             'openssl,sage'
@@ -867,7 +818,7 @@ class DocTestController(SageObject):
         for o in ("all", "sagenb"):
             if o in opt:
                 raise ValueError("You cannot run gdb/valgrind on the whole sage%s library"%("" if o == "all" else "nb"))
-        for o in ("all", "sagenb", "long", "force_lib", "verbose", "failed", "new"):
+        for o in ("all", "sagenb", "long", "force_lib", "verbose", "failed"):
             if o in opt:
                 cmd += "--%s "%o
         for o in ("timeout", "randorder", "stats_path"):
