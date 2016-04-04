@@ -1685,10 +1685,10 @@ ext_modules = [
     ##
     ################################
 
-    Extension('sage.sets.disjoint_set',
-              sources = ['sage/sets/disjoint_set.pyx'],
-              libraries = ['flint'],
-              extra_compile_args = ['-std=c99']),
+#    Extension('sage.sets.disjoint_set',
+#              sources = ['sage/sets/disjoint_set.pyx'],
+#              libraries = ['flint'],
+#              extra_compile_args = ['-std=c99']),
 
     Extension('sage.sets.finite_set_map_cy',
               sources=['sage/sets/finite_set_map_cy.pyx']),
