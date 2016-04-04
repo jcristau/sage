@@ -701,7 +701,7 @@ ext_modules = [
     ##
     ###################################
 
-    Extension('*', ["sage/libs/arb/*.pyx"]),
+#    Extension('*', ["sage/libs/arb/*.pyx"]),
 
     ###################################
     ##
