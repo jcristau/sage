@@ -215,11 +215,11 @@ ext_modules = [
     ##
     ################################
 
-    Extension('sage.coding.codecan.codecan',
-              sources = ['sage/coding/codecan/codecan.pyx'],
-              libraries = ['flint']),
-
-    Extension('*', ['sage/coding/**/*.pyx']),
+#    Extension('sage.coding.codecan.codecan',
+#              sources = ['sage/coding/codecan/codecan.pyx'],
+#              libraries = ['flint']),
+#
+#    Extension('*', ['sage/coding/**/*.pyx']),
 
     ################################
     ##
@@ -717,17 +717,17 @@ ext_modules = [
     ##
     ################################
 
-    Extension('sage.libs.gap.util',
-              sources = ["sage/libs/gap/util.pyx"],
-              libraries = ['gmp', 'gap', 'm']),
-
-    Extension('sage.libs.gap.element',
-              sources = ["sage/libs/gap/element.pyx"],
-              libraries = ['gmp', 'gap', 'm']),
-
-    Extension('sage.libs.gap.libgap',
-              sources = ["sage/libs/gap/libgap.pyx"],
-              libraries = ['gmp', 'gap', 'm']),
+#    Extension('sage.libs.gap.util',
+#              sources = ["sage/libs/gap/util.pyx"],
+#              libraries = ['gmp', 'gap', 'm']),
+#
+#    Extension('sage.libs.gap.element',
+#              sources = ["sage/libs/gap/element.pyx"],
+#              libraries = ['gmp', 'gap', 'm']),
+#
+#    Extension('sage.libs.gap.libgap',
+#              sources = ["sage/libs/gap/libgap.pyx"],
+#              libraries = ['gmp', 'gap', 'm']),
 
     ###################################
     ##
