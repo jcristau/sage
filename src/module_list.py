@@ -442,10 +442,10 @@ ext_modules = [
     ##
     ################################
 
-    Extension('*', ['sage/groups/*.pyx']),
-
-    Extension('sage.groups.semimonomial_transformations.semimonomial_transformation',
-              sources = ['sage/groups/semimonomial_transformations/semimonomial_transformation.pyx']),
+#    Extension('*', ['sage/groups/*.pyx']),
+#
+#    Extension('sage.groups.semimonomial_transformations.semimonomial_transformation',
+#              sources = ['sage/groups/semimonomial_transformations/semimonomial_transformation.pyx']),
 
     ###################################
     ##
@@ -453,58 +453,58 @@ ext_modules = [
     ##
     ###################################
 
-    Extension('sage.groups.perm_gps.permgroup_element',
-              sources = ['sage/groups/perm_gps/permgroup_element.pyx']),
-
-    Extension('sage.groups.perm_gps.partn_ref.automorphism_group_canonical_label',
-              sources = ['sage/groups/perm_gps/partn_ref/automorphism_group_canonical_label.pyx'],
-              libraries = ['flint'],
-              extra_compile_args = ['-std=c99']),
-
-    Extension('sage.groups.perm_gps.partn_ref.canonical_augmentation',
-              sources = ['sage/groups/perm_gps/partn_ref/canonical_augmentation.pyx'],
-              libraries = ['flint'],
-              extra_compile_args = ['-std=c99']),
-
-    Extension('sage.groups.perm_gps.partn_ref.double_coset',
-              sources = ['sage/groups/perm_gps/partn_ref/double_coset.pyx'],
-              libraries = ['flint'],
-              extra_compile_args = ['-std=c99']),
-
-    Extension('sage.groups.perm_gps.partn_ref.refinement_binary',
-              sources = ['sage/groups/perm_gps/partn_ref/refinement_binary.pyx'],
-              libraries = ['flint'],
-              extra_compile_args = ['-std=c99']),
-
-    Extension('sage.groups.perm_gps.partn_ref.refinement_graphs',
-              sources = ['sage/groups/perm_gps/partn_ref/refinement_graphs.pyx'],
-              libraries = ['flint'],
-              extra_compile_args = ['-std=c99']),
-
-    Extension('sage.groups.perm_gps.partn_ref.refinement_lists',
-              sources = ['sage/groups/perm_gps/partn_ref/refinement_lists.pyx'],
-              libraries = ['flint'],
-              extra_compile_args = ['-std=c99']),
-
-    Extension('sage.groups.perm_gps.partn_ref.refinement_matrices',
-              sources = ['sage/groups/perm_gps/partn_ref/refinement_matrices.pyx'],
-              libraries = ['flint'],
-              extra_compile_args = ['-std=c99']),
-
-    Extension('sage.groups.perm_gps.partn_ref.refinement_python',
-              sources = ['sage/groups/perm_gps/partn_ref/refinement_python.pyx'],
-              libraries = ['flint'],
-              extra_compile_args = ['-std=c99']),
-
-    Extension('sage.groups.perm_gps.partn_ref.refinement_sets',
-              sources = ['sage/groups/perm_gps/partn_ref/refinement_sets.pyx'],
-              libraries = ['flint'],
-              extra_compile_args = ['-std=c99']),
-
-    Extension('sage.groups.perm_gps.partn_ref2.refinement_generic',
-              sources = ['sage/groups/perm_gps/partn_ref2/refinement_generic.pyx'],
-              libraries = ["flint", "gmp", "gmpxx", "stdc++"],
-              extra_compile_args=["-std=c99"]),
+#    Extension('sage.groups.perm_gps.permgroup_element',
+#              sources = ['sage/groups/perm_gps/permgroup_element.pyx']),
+#
+#    Extension('sage.groups.perm_gps.partn_ref.automorphism_group_canonical_label',
+#              sources = ['sage/groups/perm_gps/partn_ref/automorphism_group_canonical_label.pyx'],
+#              libraries = ['flint'],
+#              extra_compile_args = ['-std=c99']),
+#
+#    Extension('sage.groups.perm_gps.partn_ref.canonical_augmentation',
+#              sources = ['sage/groups/perm_gps/partn_ref/canonical_augmentation.pyx'],
+#              libraries = ['flint'],
+#              extra_compile_args = ['-std=c99']),
+#
+#    Extension('sage.groups.perm_gps.partn_ref.double_coset',
+#              sources = ['sage/groups/perm_gps/partn_ref/double_coset.pyx'],
+#              libraries = ['flint'],
+#              extra_compile_args = ['-std=c99']),
+#
+#    Extension('sage.groups.perm_gps.partn_ref.refinement_binary',
+#              sources = ['sage/groups/perm_gps/partn_ref/refinement_binary.pyx'],
+#              libraries = ['flint'],
+#              extra_compile_args = ['-std=c99']),
+#
+#    Extension('sage.groups.perm_gps.partn_ref.refinement_graphs',
+#              sources = ['sage/groups/perm_gps/partn_ref/refinement_graphs.pyx'],
+#              libraries = ['flint'],
+#              extra_compile_args = ['-std=c99']),
+#
+#    Extension('sage.groups.perm_gps.partn_ref.refinement_lists',
+#              sources = ['sage/groups/perm_gps/partn_ref/refinement_lists.pyx'],
+#              libraries = ['flint'],
+#              extra_compile_args = ['-std=c99']),
+#
+#    Extension('sage.groups.perm_gps.partn_ref.refinement_matrices',
+#              sources = ['sage/groups/perm_gps/partn_ref/refinement_matrices.pyx'],
+#              libraries = ['flint'],
+#              extra_compile_args = ['-std=c99']),
+#
+#    Extension('sage.groups.perm_gps.partn_ref.refinement_python',
+#              sources = ['sage/groups/perm_gps/partn_ref/refinement_python.pyx'],
+#              libraries = ['flint'],
+#              extra_compile_args = ['-std=c99']),
+#
+#    Extension('sage.groups.perm_gps.partn_ref.refinement_sets',
+#              sources = ['sage/groups/perm_gps/partn_ref/refinement_sets.pyx'],
+#              libraries = ['flint'],
+#              extra_compile_args = ['-std=c99']),
+#
+#    Extension('sage.groups.perm_gps.partn_ref2.refinement_generic',
+#              sources = ['sage/groups/perm_gps/partn_ref2/refinement_generic.pyx'],
+#              libraries = ["flint", "gmp", "gmpxx", "stdc++"],
+#              extra_compile_args=["-std=c99"]),
 
     ################################
     ##
