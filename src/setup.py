@@ -556,6 +556,15 @@ def run_cythonize():
     # enclosing Python scope (e.g. to perform variable injection).
     Cython.Compiler.Options.old_style_globals = True
 
+    #XXX
+    def find_include_file(self, filename, pos):
+        path = self.search_include_directories(filename, "", pos,
+                                               include=True, sys_path=True)
+        if not path:
+            Cython.Compiler.Main.error(pos, "'%s' not found" % filename)
+        return path
+    Cython.Compiler.Main.Context.find_include_file = find_include_file
+
     debug = False
     if os.environ.get('SAGE_DEBUG', None) != 'no':
         print('Enabling Cython debugging support')
