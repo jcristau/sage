@@ -610,8 +610,8 @@ ext_modules = [
               extra_link_args = uname_specific("Linux", ["-Wl,-z,noexecstack"],
                                                         [])),
 
-    Extension('sage.libs.lrcalc.lrcalc',
-              sources = ["sage/libs/lrcalc/lrcalc.pyx"]),
+#    Extension('sage.libs.lrcalc.lrcalc',
+#              sources = ["sage/libs/lrcalc/lrcalc.pyx"]),
 
 #    Extension('sage.libs.pari.closure',
 #              sources = ["sage/libs/pari/closure.pyx"],
