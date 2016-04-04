@@ -1746,7 +1746,7 @@ ext_modules = [
     ##
     ################################
 
-    Extension('*', ['sage/symbolic/*.pyx']),
+#    Extension('*', ['sage/symbolic/*.pyx']),
 
     ################################
     ##
