@@ -389,9 +389,9 @@ ext_modules = [
               libraries = ['modulardecomposition'],
               package = 'modular_decomposition'),
 
-    Extension('sage.graphs.planarity',
-              sources = ['sage/graphs/planarity.pyx'],
-              libraries=['planarity']),
+#    Extension('sage.graphs.planarity',
+#              sources = ['sage/graphs/planarity.pyx'],
+#              libraries=['planarity']),
 
     Extension('sage.graphs.strongly_regular_db',
               sources = ['sage/graphs/strongly_regular_db.pyx']),
