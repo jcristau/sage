@@ -74,7 +74,7 @@ class NotebookJupyter(object):
     """)
 
     def __init__(self, argv):
-        from sage.repl.ipython_kernel.install import have_prerequisites
+        from sage.repl.ipython_kernel.kernel import have_prerequisites
         if not have_prerequisites():
             print(self.PREREQUISITE_ERROR)
             raise SystemExit(1)

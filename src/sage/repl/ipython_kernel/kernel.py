@@ -95,9 +95,7 @@ class SageKernel(IPythonKernel):
               'url': 'kernelspecs/sagemath/doc/index.html'},
              ...]
         """
-        from sage.repl.ipython_kernel.install import SageKernelSpec
-        identifier = SageKernelSpec.identifier()
-        kernel_url = lambda x: 'kernelspecs/{0}/{1}'.format(identifier, x)
+        kernel_url = lambda x: 'kernelspecs/{0}/{1}'.format(self.identifier(), x)
         return [
             {
                 'text': 'Sage Documentation',
@@ -168,3 +166,49 @@ class SageKernel(IPythonKernel):
     def pre_handler_hook(self):
         from cysignals import init_cysignals
         self.saved_sigint_handler = init_cysignals()
+
+    @classmethod
+    def identifier(cls):
+        """
+        Internal identifier for the SageMath kernel
+
+        OUTPUT: the string ``"sagemath"``.
+
+        EXAMPLES::
+
+            sage: from sage.repl.ipython_kernel.kernel import SageKernel
+            sage: SageKernel.identifier()
+            'sagemath'
+        """
+        return 'sagemath'
+
+def have_prerequisites(debug=True):
+    """
+    Check that we have all prerequisites to run the Jupyter notebook.
+
+    In particular, the Jupyter notebook requires OpenSSL whether or
+    not you are using https. See :trac:`17318`.
+
+    INPUT:
+
+    ``debug`` -- boolean (default: ``True``). Whether to print debug
+    information in case that prerequisites are missing.
+
+    OUTPUT:
+
+    Boolean.
+
+    EXAMPLES::
+
+        sage: from sage.repl.ipython_kernel.kernel import have_prerequisites
+        sage: have_prerequisites(debug=False) in [True, False]
+        True
+    """
+    try:
+        from notebook.notebookapp import NotebookApp
+        return True
+    except ImportError:
+        if debug:
+            import traceback
+            traceback.print_exc()
+        return False

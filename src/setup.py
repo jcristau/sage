@@ -644,19 +644,11 @@ print('Finished cleaning, time: %.2f seconds.' % (time.time() - t))
 
 
 #########################################################
-### Install also Jupyter kernel spec
+### Add Jupyter kernel spec and notebook extensions
 #########################################################
 
-# We cannot just add the installation of the kernel spec to data_files
-# since the file is generated, not copied.
-class sage_install(install):
-    def run(self):
-        install.run(self)
-        self.install_kernel_spec()
-
-    def install_kernel_spec(self):
-        from sage.repl.ipython_kernel.install import SageKernelSpec
-        SageKernelSpec.update()
+from sage_setup.jupyter.install import SageKernelSpec
+python_data_files.append(SageKernelSpec.ipython_extra_files()[0])
 
 
 #########################################################
@@ -673,5 +665,5 @@ code = setup(name = 'sage',
       packages    = python_packages,
       data_files  = python_data_files,
       scripts = [],
-      cmdclass = dict(build_ext=sage_build_ext, install=sage_install),
+      cmdclass = { 'build_ext' : sage_build_ext},
       ext_modules = ext_modules)
