@@ -622,25 +622,10 @@ print("Discovering Python/Cython source code....")
 t = time.time()
 from sage_setup.find import find_python_sources, find_extra_files
 python_packages, python_modules = find_python_sources(
-    SAGE_SRC, ['sage', 'sage_setup'])
+    SAGE_SRC, ['sage'])
 python_data_files = find_extra_files(python_packages,
     ".", SAGE_CYTHONIZED, SAGE_LIB, ["ntlwrap.cpp"])
 print("Discovered Python/Cython sources, time: %.2f seconds." % (time.time() - t))
-
-
-#########################################################
-### Clean
-#########################################################
-
-print('Cleaning up stale installed files....')
-t = time.time()
-from sage_setup.clean import clean_install_dir
-output_dirs = SITE_PACKAGES + glob.glob(os.path.join(SAGE_SRC, 'build', 'lib*'))
-for output_dir in output_dirs:
-    print('- cleaning {0}'.format(output_dir))
-    clean_install_dir(output_dir, python_packages, python_modules,
-            ext_modules, python_data_files)
-print('Finished cleaning, time: %.2f seconds.' % (time.time() - t))
 
 
 #########################################################

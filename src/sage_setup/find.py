@@ -116,7 +116,7 @@ def find_extra_files(packages, src_dir, cythonized_dir, site_packages, special_f
         cydir = os.path.join(cythonized_dir, dir)
 
         files = [os.path.join(sdir, f) for f in os.listdir(sdir)
-                if f.endswith((".pxd", ".pxi")) or f in special_filenames]
+                if f.endswith((".pxd", ".pxi", ".pyx", ".rst")) or f in special_filenames]
         if os.path.isdir(cydir):  # Not every directory contains Cython files
             files += [os.path.join(cydir, f) for f in os.listdir(cydir)
                     if f.endswith(".h")]

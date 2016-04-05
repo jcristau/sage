@@ -24,7 +24,7 @@ from sage.misc.cachefunc import cached_method
 from sage.misc.misc import sage_makedirs
 from sage.env import SAGE_DOC_SRC, SAGE_DOC, SAGE_SRC
 
-from .build_options import (LANGUAGES, SPHINXOPTS, PAPER, OMIT,
+from sage_setup.docbuild.build_options import (LANGUAGES, SPHINXOPTS, PAPER, OMIT,
      PAPEROPTS, ALLSPHINXOPTS, NUM_THREADS, WEBSITESPHINXOPTS,
      INCREMENTAL_BUILD, ABORT_ON_ERROR)
 

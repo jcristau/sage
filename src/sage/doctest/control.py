@@ -524,7 +524,6 @@ class DocTestController(SageObject):
         def all_files():
             from glob import glob
             self.files.append(opj(SAGE_SRC, 'sage'))
-            self.files.append(opj(SAGE_SRC, 'sage_setup'))
             self.files.append(SAGE_DOC_SRC)
             self.options.sagenb = True
         if self.options.all:
